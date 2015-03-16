@@ -1,173 +1,171 @@
 <!doctype html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="https://www.facebook.com/2008/fbml" itemscope="itemscope" itemtype="http://schema.org/Product">
 
-    <head>
-        <meta charset="utf-8"/>
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+   
+    <title>Gleepost</title>
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+    <meta name="keywords" content="node.js, express, mongoose, mongodb, angularjs, swig">
+    <meta name="description" content="MEAN - A Modern Stack: MongoDB, ExpressJS, AngularJS, NodeJS. (BONUS: Passport User Support).">
 
-        <title>Gleepost</title>
-        <meta http-equiv="Content-type" content="text/html;charset=UTF-8"/>
-        <meta name="keywords" content="node.js, express, mongoose, mongodb, angularjs, swig"/>
-        <meta name="description" content="MEAN - A Modern Stack: MongoDB, ExpressJS, AngularJS, NodeJS. (BONUS: Passport User Support)."/>
+    <meta property="fb:app_id" content="APP_ID">
+    <meta property="og:title" content="Gleepost - Front-Page">
+    <meta property="og:description" content="Gleepost - A Modern Social Network.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="APP
+    _URL">
+    <meta property="og:image" content="APP_LOGO">
+    <meta property="og:site_name" content="MEAN - A Modern Stack">
+    <meta property="fb:admins" content="APP_ADMIN"> 
+    <meta name="google-site-verification" content="mog5hTsyLTeRMg7IeN0qZ3XtxGxta12EAENCUjZQVCA" />
 
-        <meta property="fb:app_id" content="APP_ID"/>
-        <meta property="og:title" content="Gleepost - Front-Page"/>
-        <meta property="og:description" content="Gleepost - A Modern Social Network."/>
-        <meta property="og:type" content="website"/>
-        <meta property="og:url" content="APP_URL"/>
-        <meta property="og:image" content="APP_LOGO" />
-        <meta property="og:site_name" content="MEAN - A Modern Stack" />
-        <meta property="fb:admins" content="APP_ADMIN" /> 
-        <meta name="google-site-verification" content="mog5hTsyLTeRMg7IeN0qZ3XtxGxta12EAENCUjZQVCA" />
+    <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
 
-        <!--[if lt IE 9]>
-        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-        <![endif]-->
+    <!--<link rel="stylesheet" href="/bower_components/jquery-ui/themes/cupertino/jquery-ui.min.css">-->
 
-        <!--<link rel="stylesheet" href="/bower_components/jquery-ui/themes/cupertino/jquery-ui.min.css">-->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="/bower_components/angular-loading-bar/src/loading-bar.css"></script>
+    <link rel="stylesheet" href="/assets/js/date-picker/angular-pickadate.css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 
-        <link rel="stylesheet" href="assets/css/style.css">
-            <link rel="stylesheet" href="/bower_components/angular-loading-bar/src/loading-bar.css"></script>
-                <link rel="stylesheet" href="/assets/js/date-picker/angular-pickadate.css">
-                    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    
+</head>
 
+<body ng-app="gleepostweb" ng-controller="SuperMainController" ng-class="{'login-bg':currentState=='auth.login'}" ng-class="{'lbg-overlay':currentState=='auth.login'}" ng-hint>
+  <div  ng-show="window.isLoggedIn">
+      <div ng-include src="'views/header.html'"></div>
+  </div>
+  <div class="clearFix"></div>
+    <div id="dynamicContent">
+        <div data-ui-view ></div>
+    </div
 
-                        </head>
+</body>
+<script src="/bower_components/jquery/dist/jquery.js"></script>
+<script src="/bower_components/jquery-ui/jquery-ui.min.js"></script>
+<script src="/assets/js/socket.io-1.0.6.js"></script>
+<script src="/bower_components/moment/moment.js"></script>
+<script src="/bower_components/stringjs/lib/string.js"></script>
+<script src="/bower_components/angular/angular.js"></script>
+<script src="/bower_components/twemoji/twemoji.js"></script>
+<script src="/bower_components/angular-twemoji/dist/angular-twemoji.js"></script>
+<script src="/bower_components/angular-cookies/angular-cookies.js"></script>
+<script src="/bower_components/angular-bootstrap/ui-bootstrap.js"></script>
+<script src="/bower_components/angular-mocks/angular-mocks.js"></script>
+<script src="/bower_components/angular-resource/angular-resource.js"></script>
+<script src="/bower_components/angular-route/angular-route.js"></script>
+<script src="/bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+<script src="/bower_components/angular-loading-bar/src/loading-bar.js"></script>
 
-                        <body ng-app="gleepostweb" ng-controller="SuperMainController" ng-class="{'login-bg':currentState == 'auth.login'}" ng-class="{'lbg-overlay':currentState == 'auth.login'}" ng-hint>
-                            <div  ng-show="window.isLoggedIn">
-                                <div ng-include src="'views/header.html'"></div>
-                            </div>
-                            <div class="clearFix"></div>
-                            <div id="dynamicContent">
-                                <div data-ui-view ></div>
-                            </div
+<script src="/bower_components/ng-file-upload-shim/angular-file-upload-shim.min.js"></script> 
+<script src="/bower_components/ng-file-upload/angular-file-upload.min.js"></script> 
 
-                        </body>
-                        <script src="/bower_components/jquery/dist/jquery.js"></script>
-                        <script src="/bower_components/jquery-ui/jquery-ui.min.js"></script>
-                        <script src="/assets/js/socket.io-1.0.6.js"></script>
-                        <script src="/bower_components/moment/moment.js"></script>
-                        <script src="/bower_components/stringjs/lib/string.js"></script>
-                        <script src="/bower_components/angular/angular.js"></script>
-                        <script src="/bower_components/twemoji/twemoji.js"></script>
-                        <script src="/bower_components/angular-twemoji/dist/angular-twemoji.js"></script>
-                        <script src="/bower_components/angular-cookies/angular-cookies.js"></script>
-                        <script src="/bower_components/angular-bootstrap/ui-bootstrap.js"></script>
-                        <script src="/bower_components/angular-mocks/angular-mocks.js"></script>
-                        <script src="/bower_components/angular-resource/angular-resource.js"></script>
-                        <script src="/bower_components/angular-route/angular-route.js"></script>
-                        <script src="/bower_components/angular-ui-router/release/angular-ui-router.js"></script>
-                        <script src="/bower_components/angular-loading-bar/src/loading-bar.js"></script>
-
-                        <script src="/bower_components/ng-file-upload-shim/angular-file-upload-shim.min.js"></script> 
-                        <script src="/bower_components/ng-file-upload/angular-file-upload.min.js"></script> 
-
-                        <script src="/assets/js/date-picker/angular-pickadate.js"></script>
-
-
-
-                        <script src="/bower_components/underscore/underscore.js"></script>
-
-                        <script type="/bower_components/angular-hint/hint.js"></script>
-
-                        <script src="/bower_components/angular-truncate/src/truncate.js"></script>
-                        <script src="/bower_components/gsap/src/minified/TweenMax.min.js"></script>
-                        <script src="/bower_components/angular-animate/angular-animate.js"></script>
-                        <script src="/bower_components/ng-Fx/dist/ngFx.js"></script>
-
-                        <script src="/init.js"></script>
-                        <script src="/gleepostweb.js"></script>
-                        <script src="/controllers/header.js"></script>
-                        <script src="/controllers/index.js"></script>
-                        <script src="/services/interceptor.js"></script>
-                        <script src="/services/notifications.js"></script>
-                        <script src="/services/messages.js"></script>
-                        <script src="/routes/main.js"></script>
+<script src="/assets/js/date-picker/angular-pickadate.js"></script>
 
 
 
-                        <script src="/packages/utilities/utilities.js"></script>
-                        <script src="/packages/utilities/settings.js"></script>
-                        <script src="/packages/utilities/services/data.js"></script>
-                        <script src="/packages/utilities/services/util.js"></script>
-                        <script src="/packages/utilities/services/socketData.js"></script>
-                        <script src="/packages/utilities/filters/truncate.js"></script>
+<script src="/bower_components/underscore/underscore.js"></script>
 
-                        <script src="/packages/campusWall/campusWall.js"></script>
-                        <script src="/packages/campusWall/routes/campuswall.js"></script>
-                        <script src="/packages/campusWall/controllers/campusWall.js"></script>
-                        <script src="/packages/campusWall/services/campusWall.js"></script>
-                        <script src="/packages/campusWall/filters/campusWall.js"></script>
-                        <script src="/packages/campusWall/directives/campusWall.js"></script>
+<script type="/bower_components/angular-hint/hint.js"></script>
 
-                        <script src="/packages/dashboard/dashboard.js"></script>
-                        <script src="/packages/dashboard/routes/dashboard.js"></script>
-                        <script src="/packages/dashboard/controllers/dashboard.js"></script>
-                        <script src="/packages/dashboard/services/dashboard.js"></script>
+<script src="/bower_components/angular-truncate/src/truncate.js"></script>
 
-                        <script src="/packages/messenger/messenger.js"></script>
-                        <script src="/packages/messenger/routes/messenger.js"></script>
-                        <script src="/packages/messenger/filters/messenger.js"></script>
-                        <script src="/packages/messenger/controllers/messenger.js"></script>
-                        <script src="/packages/messenger/services/messenger.js"></script>
-                        <script src="/packages/messenger/directives/messenger.js"></script>
-
-                        <script src="/packages/network/network.js"></script>
-                        <script src="/packages/network/routes/network.js"></script>
-                        <script src="/packages/network/controllers/network.js"></script>
-                        <script src="/packages/network/services/network.js"></script>
-                        <script src="/packages/network/filters/network.js"></script>
+<script src="/init.js"></script>
+<script src="/gleepostweb.js"></script>
+<script src="/controllers/header.js"></script>
+<script src="/controllers/index.js"></script>
+<script src="/services/interceptor.js"></script>
+<script src="/services/notifications.js"></script>
+<script src="/services/messages.js"></script>
+<script src="/routes/main.js"></script>
 
 
-                        <script src="/packages/notifications/notifications.js"></script>
-                        <script src="/packages/notifications/routes/notifications.js"></script>
-                        <script src="/packages/notifications/controllers/notifications.js"></script>
-                        <script src="/packages/notifications/services/notifications.js"></script>
 
-                        <script src="/packages/posts/posts.js"></script>
-                        <script src="/packages/posts/routes/posts.js"></script>
-                        <script src="/packages/posts/controllers/posts.js"></script>
-                        <script src="/packages/posts/services/posts.js"></script>
+<script src="/packages/utilities/utilities.js"></script>
+<script src="/packages/utilities/settings.js"></script>
+<script src="/packages/utilities/services/data.js"></script>
+<script src="/packages/utilities/services/util.js"></script>
+<script src="/packages/utilities/services/socketData.js"></script>
+<script src="/packages/utilities/filters/truncate.js"></script>
 
-                        <script src="/packages/users/users.js"></script>
-                        <script src="/packages/users/roleConfig.js"></script>
-                        <script src="/packages/users/routes/auth.js"></script>
-                        <script src="/packages/users/controllers/User.js"></script>
-                        <script src="/packages/users/services/User.js"></script>
-                        <script src="/packages/users/services/UserProfile.js"></script>
+<script src="/packages/campusWall/campusWall.js"></script>
+<script src="/packages/campusWall/routes/campuswall.js"></script>
+<script src="/packages/campusWall/controllers/campusWall.js"></script>
+<script src="/packages/campusWall/services/campusWall.js"></script>
+<script src="/packages/campusWall/filters/campusWall.js"></script>
+<script src="/packages/campusWall/directives/campusWall.js"></script>
 
-                        <script src="/packages/search/search.js"></script>
-                        <script src="/packages/search/routes/search.js"></script>
-                        <script src="/packages/search/controllers/search.js"></script>
-                        <script src="/packages/search/services/search.js"></script>
-                        <script src="/assets/js/jquery.bpopup.js"></script>
-                        <script src="/assets/js/jquery.mousewheel.js"></script>
-                        <script type="text/javascript"src="/assets/js/jquery.trackpad-scroll-emulator.min.js"></script>
-                        <script>
-                                moment().format();
-                        </script>
+<script src="/packages/dashboard/dashboard.js"></script>
+<script src="/packages/dashboard/routes/dashboard.js"></script>
+<script src="/packages/dashboard/controllers/dashboard.js"></script>
+<script src="/packages/dashboard/services/dashboard.js"></script>
 
-                        <script type="text/javascript">
-                            //$('.wraper').block({ message: null }); 
+<script src="/packages/messenger/messenger.js"></script>
+<script src="/packages/messenger/routes/messenger.js"></script>
+<script src="/packages/messenger/filters/messenger.js"></script>
+<script src="/packages/messenger/controllers/messenger.js"></script>
+<script src="/packages/messenger/services/messenger.js"></script>
+<script src="/packages/messenger/directives/messenger.js"></script>
 
-                            /*Pace.on('start', function(){
-                             // alert("Pace Started");
-                             $('#dynamicContent').css('visibility', 'hidden');
-                             //disable_scroll();
-                             // $('#dynamicContent').block({ message: null }); 
-                             //$('#dynamicContent').fadeOut( "fast" )
-                             //$('#dynamicContent').fadeToggle();
-                             });
-                             
-                             Pace.on('hide', function(){
-                             // alert("Pace Started");
-                             // $('#dynamicContent').css('visibility', 'visible');
-                             // enable_scroll();
-                             // $('#dynamicContent').css('visibility', 'visible').fadeIn( "fast" )
-                             // $('#dynamicContent').fadeToggle();
-                             $('#dynamicContent').css('visibility','visible').hide().fadeIn("slow");
-                             });*/
-                        </script>
+<script src="/packages/network/network.js"></script>
+<script src="/packages/network/routes/network.js"></script>
+<script src="/packages/network/controllers/network.js"></script>
+<script src="/packages/network/services/network.js"></script>
+<script src="/packages/network/filters/network.js"></script>
 
-                        </html>
+
+<script src="/packages/notifications/notifications.js"></script>
+<script src="/packages/notifications/routes/notifications.js"></script>
+<script src="/packages/notifications/controllers/notifications.js"></script>
+<script src="/packages/notifications/services/notifications.js"></script>
+
+<script src="/packages/posts/posts.js"></script>
+<script src="/packages/posts/routes/posts.js"></script>
+<script src="/packages/posts/controllers/posts.js"></script>
+<script src="/packages/posts/services/posts.js"></script>
+
+<script src="/packages/users/users.js"></script>
+<script src="/packages/users/roleConfig.js"></script>
+<script src="/packages/users/routes/auth.js"></script>
+<script src="/packages/users/controllers/User.js"></script>
+<script src="/packages/users/services/User.js"></script>
+<script src="/packages/users/services/UserProfile.js"></script>
+
+<script src="/packages/search/search.js"></script>
+<script src="/packages/search/routes/search.js"></script>
+<script src="/packages/search/controllers/search.js"></script>
+<script src="/packages/search/services/search.js"></script>
+<script src="/assets/js/jquery.bpopup.js"></script>
+<script src="/assets/js/jquery.mousewheel.js"></script>
+<script type="text/javascript"src="/assets/js/jquery.trackpad-scroll-emulator.min.js"></script>
+<script>
+    moment().format();
+</script>
+
+<script type="text/javascript">
+//$('.wraper').block({ message: null }); 
+
+/*Pace.on('start', function(){
+   // alert("Pace Started");
+   $('#dynamicContent').css('visibility', 'hidden');
+   //disable_scroll();
+  // $('#dynamicContent').block({ message: null }); 
+  //$('#dynamicContent').fadeOut( "fast" )
+  //$('#dynamicContent').fadeToggle();
+});
+
+Pace.on('hide', function(){
+   // alert("Pace Started");
+  // $('#dynamicContent').css('visibility', 'visible');
+  // enable_scroll();
+ // $('#dynamicContent').css('visibility', 'visible').fadeIn( "fast" )
+ // $('#dynamicContent').fadeToggle();
+ $('#dynamicContent').css('visibility','visible').hide().fadeIn("slow");
+});*/
+</script>
+
+</html>
