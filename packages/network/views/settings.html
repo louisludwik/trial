@@ -1,0 +1,40 @@
+<div class="group-settingsarea-wrapper" ng-controller="networkSettingsCtrl">
+  <div class="group-settingsarea-container right">
+    <div class="group-settingsarea floatLeft">
+      <div class="group-settingsarea-header floatLeft">
+        <p class="floatLeft">Edit Group Settings</p>
+      </div>
+      <div class="group-settingsarea-inputs floatLeft">
+        <form>
+          <label class="group-settingsarea-inputs-lable floatLeft">Group Name</label>
+          <input type="text" name="group_name[]" value="" class="group-settingsarea-inputs-formInputs floatLeft" ng-model="networkDetails.name">
+          <label class="group-settingsarea-inputs-lable floatLeft">Add Members</label>
+          <div class="adduser-list adduser-list-setting"> <span class="added-user" ng-repeat="user in addedUsers"> {{user.name}} <a ng-click="removeUser($index)" style="cursor: pointer;"> <img src="assets/icons/cancel.png" style="width:9px;"> </a> </span> 
+            <!--<span class="added-user">Patrick Bruzeks <a href="javascript:void(0)"><img
+                                src="assets/icons/remove-icon.png"></a></span>-->
+            <input type="text" class="group-settingsarea-inputs-formInputs floatLeft" placeholder="Who do you want to add?" id="userlist-input" autofocus="autofocus" data-ng-model="newUserSearch"
+                               ng-model-options="{debounce: 250}">
+            <div class="autocomplete-list" style="overflow:auto;z-index:10000;max-height:300px">
+              <ul>
+                <li style="cursor: pointer;" ng-repeat="user in resultUsers" ng-click="userSelected($index)"><a><img src="{{user.profile_image}}"> {{user.name}}</a>
+                  <hr>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <label class="group-settingsarea-inputs-lable floatLeft">Group Description</label>
+          <textarea name="groupdesc[]" cols="30" rows="5" class="group-settingsarea-textarea floatLeft" ng-model="networkDetails.description"></textarea>
+          <label class="group-settingsarea-inputs-lable floatLeft">Group Image</label>
+          <div class="floatLeft image-upload">
+            <label for="group-settingsarea-inputfile" class="inputifle-lable"> <img src="assets/icons/input-file.png" /> </label>
+            <input id="group-settingsarea-inputfile" type="file" />
+          </div>
+          <div class="buttons floatRight">
+            <input ng-click="SaveChanges()" class="btn cGreenBtn-w margin-right-top" value="Save Changes">
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="clear"></div>
+</div>

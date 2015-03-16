@@ -1,0 +1,35 @@
+<div class="group-box floatLeft" ng-repeat="network in searchedNetworks">
+    <div ng-show="!network.joined">
+        <div class="join-group" ng-click="joinMe(network)">
+            <p class="group-text-small"><span>+</span>Join</p>
+        </div>
+        <div class="group-officail right-0">
+            <img src="assets/icons/check-icon.png">
+            <p class="group-text-small">Official</p>
+        </div>
+        <a ui-sref="network.posts({ Id:network.id })" href="javascript:void(0)" style="height:200px; overflow:hidden">
+            <div style="margin:auto"><img style="min-height:200px" src="{{network.image}}">
+            </div>
+        </a>
+        <div class="item-box-title" style="max-height:104px;overflow:hidden;text-overflow: ellipsis">
+            <a ui-sref="network.posts({ Id:network.id })">
+                <p class="title-text">{{network.name}}</p>
+            </a>
+            <p ng-if="network.description.length>0" class="title-text-small" style="height:25px" ng-bind-html="network.description | twemoji | to_trusted"></p>
+        </div>
+        <div class="item-box-info ">
+            <p class="info-text-group">{{network.membersNum}}</p>
+        </div>
+        <div class="clearFix"></div>
+    </div>
+    <div class="grpmsg-cont" ng-show="network.joined">
+        <h3>Success!</h3>
+        <div class="grpmsg-icon"><img src="assets/images/success-icon.png">
+        </div>
+        <p>You are now a member of:
+            <br /><span>{{network.name}}</span>
+        </p>
+        <div class="tourgrp-link"><a href="#"><span>Have a look around</span></a>
+        </div>
+    </div>
+</div>

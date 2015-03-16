@@ -1,0 +1,99 @@
+<div ng-controller="networkCtrl">
+  <div class="group-banner">
+    <div class="groupbanner-img" style="background-image:url(/assets/images/group-banner.jpg)"></div>
+    <div class="groupbanner-info">
+      <p ng-if="networkDetails.description.length>0" ng-bind-html="networkDetails.description | twemoji | to_trusted"></p>
+    </div>
+  </div>
+  <div class="groupsettings-wrapper">
+    <div class="groupsettings-container">
+      <div class="group-officail" style="top:18px;right:18px;"> <img src="assets/icons/check-icon.png">
+        <p class="group-text-small">Official</p>
+      </div>
+      <a href="javascript:void(0)" class="group-setting-img" style="overflow:hidden"><img src="{{networkDetails.image}}"> </a>
+      <div class="group-info">
+        <div class="group-name">
+          <p class="group-info-text">{{networkDetails.name}}</p>
+        </div>
+        <!--<div class="group-description">
+          <p ng-if="networkDetails.description.length>0" class="group-info-text-small" ng-bind-html="networkDetails.description | emoji | to_trusted"></p>
+        </div>-->
+      </div>
+      <!--<div class="group-setting-icons">
+          <ul>
+            <li> <a ui-sref="network.posts" class="group-active-link"><img src="assets/icons/post-colored.png" style="height: 29px !important; width: 35px !important;"> <span class="group-active-link">Posts</span> </a> </li>
+            <li> <a ui-sref="network.messages"><img src="assets/icons/message-icon.png" style="height: 29px !important; width: 29px !important;"><span>Group Messenger</span> </a> </li>
+            <li> <a ui-sref="network.members"><img src="assets/icons/friends-icon.png" style="height: 29px !important;width:32px"><span>Members</span> </a> </li>
+          </ul>
+          <div class="clear"></div>
+        </div>-->
+      <div class="group-post-settings"><a ui-sref="network.settings">Settings</a></div>
+    </div>
+    <div class="clearFix"></div>
+  </div>
+  <div class="group-setting-icons header-content">
+  <ul>
+    <li> <a ui-sref="network.posts" class="group-active-link"><img src="assets/icons/post-colored.png"><span class="group-active-link">Posts</span> </a> </li>
+    <li> <a ui-sref="network.messages"><img src="assets/icons/message-icon.png"><span>Group Messenger</span></a></li>
+    <li> <a ui-sref="network.members"><img src="assets/icons/dropdown.png"><span>Members</span></a></li>
+  </ul>
+  <div class="clear"></div>
+</div>
+</div>
+<div ui-view></div>
+<script type="text/javascript">
+    $(document).ready(function() {
+        // alert("On Network");
+        var url = document.URL;
+        url = url.split('/');
+        url = url[url.length - 1];
+        $(".allPostsEvents li a:contains('All Posts')").removeClass("selected");
+        if (url === "posts") {
+            $(".allPostsEvents li a:contains('All Posts')").addClass("selected");
+        } else if (url === "events") {
+            $(".allPostsEvents li a:contains('Events')").addClass("selected");
+        } else if (url === "messages") {
+            $(".allPostsEvents li a:contains('Messages')").addClass("selected");
+        } else {
+            $(".allPostsEvents li a:contains('Members')").addClass("selected");
+        }
+        //alert(url);
+        $(".allPostsEvents li a").click(function() {
+            //alert($(this).text());
+            var currActive = $(".selected");
+            //console.log(currActive);
+            currActive.removeClass("selected");
+
+            $(this).addClass("selected");
+        });
+    });
+</script>
+
+<script>
+$(window).scroll(function(){
+    if ($(window).scrollTop() >= 260) {
+       $('.group-setting-icons').addClass('fixed-nav');
+    }
+    else {
+       $('.group-setting-icons').removeClass('fixed-nav');
+    }
+});
+
+$(window).scroll(function(){
+    if ($(window).scrollTop() >= 260) {
+       $('.group-wall-container').addClass('group-wall-container-ajustments');
+    }
+    else {
+       $('.group-wall-container').removeClass('group-wall-container-ajustments');
+    }
+});
+
+$(window).scroll(function(){
+    if ($(window).scrollTop() >= 260) {
+       $('.groupsettings-wrapper').addClass('groupsettings-wrapper-top');
+    }
+    else {
+       $('.groupsettings-wrapper').removeClass('groupsettings-wrapper-top');
+    }
+});
+</script>

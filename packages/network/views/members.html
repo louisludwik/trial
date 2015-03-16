@@ -1,0 +1,62 @@
+<style>
+.cude-loader {
+	left: 63%;
+	top: 70%;
+	zoom: 0.25;
+}
+</style>
+<div class="cude-loader">
+  <div class="cube">
+    <div class="ani1">
+      <div class="front"><i></i><i></i><i></i></div>
+      <div class="left"><i></i><i></i><i></i></div>
+    </div>
+    <div class="ani2">
+      <div class="front"><i></i><i></i><i></i></div>
+      <div class="bottom"><i></i><i></i><i></i></div>
+    </div>
+    <div class="ani3">
+      <div class="front"><i></i><i></i><i></i></div>
+      <div class="right"><i></i><i></i><i></i></div>
+    </div>
+    <div class="ani4">
+      <div class="front"><i></i><i></i><i></i></div>
+      <div class="top"><i></i><i></i><i></i></div>
+    </div>
+    <div class="shadow"></div>
+  </div>
+</div>
+<div class="group-members-wrapper" ng-controller="networkMembersCtrl">
+  <div class="group-members-container right">
+    <div class="group-members floatLeft">
+      <div class="gourp-members-box floatLeft" ng-repeat="member in networkMembers">
+        <div class="members-setting-icon floatLeft" > <a href="javascript:void(0)"> <img src="assets/icons/profile-setting-icon.png"> </a> </div>
+        <div class="group-members-image floatLeft"> <a href="javascript:void(0)"> <img src="{{member.profile_image}}"> </a> </div>
+        <div class="gorup-member-name floatLeft"> <a href="javascript:void(0)">
+          <p>{{member.name}}</p>
+          </a> </div>
+        <div class="gorup-member-addby">
+          <p>Added by Keyvon B 3 months ago.</p>
+        </div>
+        <div class="member-box-overlay floatLeft">
+          <div class="members-overlay-icon floatLeft"> <a href="javascript:void(0)" class="floatLeft"> <img class="floatLeft" src="assets/icons/profile-setting-icon.png">
+            <p class="floatLeft">Settings</p>
+            </a> </div>
+          <div class="overlay-button floatLeft"> <a ui-sref="profile.posts({ Id:member.id })" class="floatLeft" style="cursor: pointer">
+            <p class="floatLeft">View Profile</p>
+            </a> </div>
+          <div ng-if="!member.isAdmin" class="overlay-button-green floatLeft" style="cursor: pointer"> <a ng-click="makeAdmin($index)" class="floatLeft">
+            <p class="floatLeft">Make Admin</p>
+            </a> </div>
+          <div ng-if="member.isAdmin" class="overlay-button-green floatLeft" style="cursor: pointer"> <a ng-click="removeAdmin($index)" class="floatLeft">
+            <p class="floatLeft">Rem Admin</p>
+            </a> </div>
+          <div ng-click="removeMember($index)" class="overlay-button-red floatLeft" style="cursor: pointer"> <a href="javascript:void(0)" class="floatLeft">
+            <p class="floatLeft">Delete</p>
+            </a> </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="success-msg"><img src="assets/icons/success-icon.png" style="margin-right:5px"> SUCCESS <a href="#" class="close"><img src="assets/icons/close-pop.png"></a></div>

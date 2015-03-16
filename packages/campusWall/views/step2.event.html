@@ -1,0 +1,35 @@
+<div class="tabs-contents">      
+      <div id="events-contents" style="display:block">
+
+        <!-- event days selection -->
+        <div class="event-type" style="display:block">
+          <h4>WHAT KIND OF EVENT IS THIS?</h4>
+          <div ng-click="ddlEventType()" id="dropdowns" ng-class="eventTypeClass"><span>{{objEventDetails['eventType']}}</span></div>
+          <ul id="evtDropDownOptions" class="options-list party-list">
+            <li><a ng-click="clickParty()" href="javascript:void(0)">Party</a></li>
+            <li><a ng-click="clickMusic()" href="javascript:void(0)">Music</a></li>
+            <li><a ng-click="clickSports()" href="javascript:void(0)">Sports</a></li>
+            <li><a ng-click="clickTheater()" href="javascript:void(0)">Theater</a></li>
+            <li><a ng-click="clickSpeaker()" href="javascript:void(0)">Speaker</a></li>
+            <li><a ng-click="clickOther()" href="javascript:void(0)">Other</a></li>
+          </ul>
+        </div>
+        <!-- end event type --> 
+        
+      </div>
+      <!-- end events contents --> 
+      
+    </div>
+    <div class="createpost-footer"> 
+      <a ui-sref="wall.event.default" class="back">
+        Back
+      </a> 
+       <ol>
+        <li class="">Slide 1 </li>
+        <li class="active">Slide 2</li>
+        <li class="">Slide 3</li>
+    </ol>
+      <a ui-sref="wall.event.step3" class="next">
+        Next
+      </a>
+    </div>

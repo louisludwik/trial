@@ -1,0 +1,32 @@
+
+
+<div class="tabs-contents">
+    <div id="events-contents" style="display:block">
+        <div class="event-days-section" style="display:block">
+            <div class="left">WHEN IS THIS
+                <br> EVENT HAPPENING?</div>
+            <div class="right button-selection">
+            	<div id="eventCalendar" pickadate ng-model="eventDate" callback="calendarDateSelected(eventDate)" ></div>
+
+                <div id="evetTimePicker">
+                    <ng-time-selector hours="hours" minutes="minutes" ng-show="showClock"></ng-time-selector>
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+    <!-- end events contents -->
+
+</div>
+
+<div class="createpost-footer"> 
+  <a ng-click="chooseEventTypeStep()" ng-show="showNext"  class="next" style="float:right">
+    Next
+  </a>
+    <ol>
+        <li class="active">Slide 1 </li>
+        <li class="">Slide 2</li>
+        <li class="">Slide 3</li>
+    </ol>
+</div>
+

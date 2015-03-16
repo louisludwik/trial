@@ -1,0 +1,135 @@
+<div id="modal-outer" style="display:none;height:600px">
+  <div class="popover-mask"></div>
+  <button id="modal-close" ng-click="closePostView()"></button>
+  <div ui-view></div>
+</div>
+<section class="grid3d" id="grid3d">
+  <div id="wallPage">
+    <div class="" id="wrapper" ng-controller="LiveCtrl">
+      <div class="slider-wrapper" id="scroller">
+        <div ng-repeat="live in campusLive" class="item-box  floatLeft" id="myItems"> <a href="javascript:void(0)" style="width:300px; overflow:hidden">
+          <div style="margin:auto"><img style="min-width:300px;min-height:155px" src="{{live.image}}"> </div>
+          </a>
+          <div class="item-box-title" style="height:66px;">
+            <p ng-if="live.text.length>0" class="title-text" ng-bind-html="live.text| characters:100 | twemoji | to_trusted"></p>
+          </div>
+          <div class="item-box-info ">
+            <p class="info-text ">{{live.time}}</p>
+          </div>
+        </div>
+      </div>
+      <div id="prev" class="floatLeft" onclick="myScroll.scrollToPage('prev', 0);return false"> <img src="assets/icons/left-icon.png"> </div>
+      <div id="next" class="floatRight" onclick="myScroll.scrollToPage('next', 0);return false"> <img src="assets/icons/right-icon.png"> </div>
+    </div>
+    <div class="clearFix"></div>
+    <div class="wall-main-wrapper" ng-controller="wallCtrl">
+      <div class="wall-wrapper">
+        <div class="buttons-container">
+          <div class="buttons">
+            <input ng-click="PartyClicked()" type="submit" class="btn blueBtn" value="Party" id='party'>
+          </div>
+          <div class="buttons">
+            <input ng-click="MusicClicked()" type="submit" class="btn purpleBtn" value="Music" id='music'>
+          </div>
+          <div class="buttons">
+            <input ng-click="SportsClicked()" type="submit" class="btn redBtn" value="Sports" id='sports'>
+          </div>
+          <div class="buttons">
+            <input ng-click="TheaterClicked()" type="submit" class="btn greenBtn" value="Theater" id='theater'>
+          </div>
+          <div class="buttons">
+            <input ng-click="SpeakerClicked()" type="submit" class="btn yellowBtn" value="Speakers" id='speaker'>
+          </div>
+          <div class="buttons">
+            <input ng-click="AllPostsClicked()" type="submit" class="btn cGreenBtn-w" value="All Posts" id='allposts'>
+          </div>
+        </div>
+        <div class="wall-container">
+          <div class="creat-post-wrapper">
+            <div class="creatpost-wrap">
+              <div class="creatpost-tabs">
+                <div class="creatpost-img"><img src="{{window.UserImage}}" alt=""> </div>
+                <ul class="my-tabs">
+                  <li style="cursor: pointer;" ng-class="{active: currentPostTab == 'announcement'}"><a ng-click="goToAnnouncement()">Announcement</a> </li>
+                  <li style="cursor: pointer;" ng-class="{active: currentPostTab == 'event'}"><a ng-click="goToEvent()">Event</a> </li>
+                  <li style="cursor: pointer;" ng-class="{active: currentPostTab == 'general'}"><a ng-click="goToGeneral()">General Post</a> </li>
+                </ul>
+                <a ng-show="showClosebtn" ng-click="btnClosePost()" class="close"><img src="assets/icons/cancel.png" alt="" width="13" height="13"> </a>
+                <div class="clearFix"></div>
+              </div>
+              <!-- end create post tabs here -->
+              <div class="tabs-contents" ng-show="!createFocused">
+                <div id="announcements-contents" style="display:block">
+                  <textarea name="" placeholder="What’s happening?" class="input-field" style="height:23px" ng-focus="focusCreatePost()"></textarea>
+                </div>
+              </div>
+              <div ui-view></div>
+              <!-- end accouncement contents --> 
+              
+            </div>
+          </div>
+          <div class="clearFix"></div>
+          <div class="post-container" ng-repeat="post in campusPosts" style="height:auto" ng-click="postClicked(post.id)">
+            <div class="event-info">
+              <h2>{{post.data.attribs.title}}</h2>
+              <div class="event-stats"> <span class="left">{{post.data['attribs']['event-time']|fromNow}}</span> <span class="right"><a href="#">{{post.data.attribs['location-desc']}}</a></span>
+                <div class="clear"></div>
+              </div>
+            </div>
+            <div class="post-image-container" style="clear: both"> <a href="javascript:void(0)" style="height:auto" ng-show="post.image"><img src="{{post.image}}" style="width:100%;height:auto"> </a> </div>
+            <div class="user-ifno">
+              <div class="left"> <a href="javascript:void(0)"><img height="35px" width="35px" src="{{post.by.profile_image}}">
+                <div class="floatLeft user-info-name">
+                  <p class="text-username">{{post.by.name}}</p>
+                  <div class="clearFix"></div>
+                  <span>{{post.time}}</span> </div>
+                <div class="clearFix"></div>
+                </a> </div>
+              <div ng-if='post.attending' class="right going"><a><span>I'm going</span></a> </div>
+              <div class="clear"></div>
+            </div>
+            <div class="clearFix"></div>
+            <div class="post-info-container">
+              <div class="post-info">
+                <p ng-if="post.text.length>0" ng-bind-html="post.text | twemoji | to_trusted"></p>
+              </div>
+              <div class="view-counter">{{post.data.views}}</div>
+            </div>
+            <div class="post-func-container">
+              <div class="post-func-icons">
+                <ul>
+                  <li> <a href="javascript:void(0)"><img class="floatLeft" src="assets/icons/defaultlike.png" style="width:30px">
+                    <p class="floatLeft">{{post.likesCount}}</p>
+                    </a> </li>
+                  <li> <a data-post="{{id}}" ng-click="showComments($index, $event)" href="javascript:void(0)" class="displaycomments"><img class="floatLeft" src="assets/icons/comment-icon.png" style="width:30px">
+                    <p class="floatLeft">{{post.commentCount}}</p>
+                    </a> </li>
+                  <li> <a href="javascript:void(0)"><img class="floatLeft" src="assets/icons/shear-icon.png" style="width:30px"> 
+                    <!--<p class="floatLeft">30</p>--> 
+                    </a> </li>
+                </ul>
+              </div>
+            </div>
+            <div class="page">
+              <div class="content_container comments-scrollbar">
+                <div ng-repeat="comment in post.comments" class="content"> <a href="javascript:void(0)" class="use-comment-image"> <img src="{{comment.profileImage}}"> </a>
+                  <p class="user-comment-name">{{comment.name}}</p>
+                  <p ng-if="comment.txt.length>0" class="floatLeft msg" ng-bind-html="comment.txt | twemoji | to_trusted"></p>
+                </div>
+              </div>
+            </div>
+            <div class="comments-text-box">
+              <div class="text-box">
+                <form class="commentsForm" ng-submit="addComment($index, $event, txtComment)">
+                  <input name="txtComment" type="text" class="formInputs txtAddComment" placeholder="Write a comment..." ng-model="txtComment" />
+                  <!--<input type="submit" class="button cGreenBtn addComment" value="post">-->
+                </form>
+              </div>
+            </div>
+          </div>
+          <div class="clearFix"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

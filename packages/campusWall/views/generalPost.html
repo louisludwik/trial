@@ -1,0 +1,36 @@
+<div ng-controller="newGeneralPost">
+
+  <div class="tabs-contents">
+      <div id="events-contents" style="display:block">
+
+
+          <div class="event-details">
+              <div class="left">
+                  <input name="" type="text" placeholder="Event title" ng-model="postTitle" />
+                  <textarea name="" cols="" rows="" placeholder="Event description" ng-model="postDesc"></textarea>
+              </div>
+              <div class="right">
+                  <p align="center">OPTIONAL EXTRAS</p>
+                  <a id="btnAddImage" ng-click="addImage()"  class="add-img"><span style="cursor: default;">Add Image</span></a>
+                  <input style="display: none;" type="file" ng-model-instant id="fileToUpload" multiple onchange="angular.element(this).scope().setFiles(this)" />
+                  <a href="javascript:void(0)" class="add-loc"><span>Location</span></a>
+                  <p align="center" style="padding-top:10px">PREVIEW</p>
+              </div>
+              <div class="clear"></div>
+          </div>
+          <!-- end event details -->
+      </div>
+      <!-- end events contents -->
+
+  </div>
+
+  <div class="createpost-footer">
+      <!--<a  class="back">
+          Back
+        </a>-->
+      <p class="right" style="display:block">
+          <input ng-disabled="!postTitle.length" type="submit" ng-click="createGeneralPost()" id="btnSubmitGeneralPost" value="Create Post" class="btn cGreenBtn-w">
+      </p>
+  </div>
+
+</div>

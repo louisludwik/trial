@@ -1,0 +1,12 @@
+<div ng-controller="newAnnouncementPost">
+    <div class="tabs-contents">
+        <div id="announcements-contents" style="display:block">
+            <textarea id="txtAnnouncement" ng-model="postText" name="" placeholder="What’s happening?" autofocus class="input-field" style="height:65px"></textarea>
+        </div>
+    </div>
+    <div class="createpost-footer"> <a href="javascript:void(0)" class="back" style="display:none">Back</a> <a href="javascript:void(0)" class="next" style="display:none">Next</a>
+        <p align="right" style="display:block">
+            <input ng-disabled="!postText.length" ng-click="createAnnouncement()" type="submit" id="" value="Create Post" class="btn cGreenBtn-w">
+        </p>
+    </div>
+</div>

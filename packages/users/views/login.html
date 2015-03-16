@@ -1,0 +1,49 @@
+<style>
+.pace .pace-progress {
+	display: none !important;
+}
+</style>
+<div ng-controller="LoginCtrl">
+  <div class="nav-wrapper-login">
+    <div class="nav-container-login width-90">
+      <form ng-submit="login()" class="right">
+        <ul class="navbar-login left">
+          <li class="floatLeft">
+            <input type="text" class="formInputs-login login-nav-input fullname" placeholder="Riddle email address" ng-model="user.email">
+          </li>
+          <li class="floatLeft" style="position:relative;">
+              <input type="password" class="formInputs-login login-nav-input fullname" placeholder="password" ng-model="user.password">
+              <span class="passrow-icon"></span>
+          </li>
+        </ul>
+        <input type="submit" id="login-submit" class="button-login cGreenBtn-w login-nav-btn left" value="Sign In">
+      </form>
+    </div>
+  </div>
+  <div class="clearFix"></div>
+  <div class="sign-up-wrapper">
+    <div id="site-logos">
+    <p><img src="assets/images/eagle-icon.png" width="60"></p>
+    <p><img src="assets/images/eaglenation.png" width="210"></p>
+    </div>
+    <p class="sign-up-p2">Connect with peers and interest groups on campus, and stay in the know about what’s happening at Riddle.</p>
+    <form class="signup-form">
+      <div class="forms-control">
+        <input type="text" class="formInputs-login signup-inputs" placeholder="Full name">
+        <input type="text" class="formInputs-login signup-inputs" placeholder="Riddle email address">
+        <input type="text" class="formInputs-login signup-inputs" placeholder="Password" style="border:0 none">
+      </div>
+      <input type="submit" class="button-login blueBtn-send signup-btn" value="Sign up">
+    </form>
+  </div>
+  <div class="signup-footer-new">
+      <p><span>About</span> <span>Contact</span> <span>Privacy</span></p>
+  </div>
+</div>
+
+<script>
+$(".navbar-login").hide();
+$('#login-submit').click(function() {
+  $('.navbar-login').show("normal", "swing");
+});
+</script>

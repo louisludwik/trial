@@ -1,0 +1,104 @@
+<style>
+    .customImage {
+        position: absolute;
+        margin: auto;
+    }
+</style>
+<div ng-controller="networksCtrl">
+    <div>
+        <div class="clearFix"></div>
+        <div class="over-flow-hidden">
+            <div class="group-slider-wrapper group-slider-wrapper-new">
+                <div class="overlay"></div>
+            </div>
+        </div>
+        <div class="clearFix"></div>
+        <div class="main-group-container">
+            <div class="group-container">
+                <div class="search-box">
+                    <form>
+                        <input type="text" class="formInputs" placeholder="Search for groups on campus" ng-model="query" />
+                        <a ng-click="searchForGroup()" ui-sref="networks.search" style="cursor: pointer">
+                            <img src="assets/icons/search-icon.png">
+                        </a>
+                    </form>
+
+                </div>
+                <div class="create-group floatLeft">
+                    <a ng-click="toggleOptions()" class="floatLeft" style="cursor: pointer">
+                        <span class="">{{selectedOption}}</span>
+                        <img class="" src="assets/icons/dropdown-icon.png">
+                    </a>
+                    <ul class="grp-dropdown" ng-show="showOptions">
+                        <li style="cursor: pointer">
+                            <a ui-sref="networks.mine" ng-click="selectMyGroups()">My Groups</a>
+                        </li>
+                        <li style="cursor: pointer">
+                            <a ui-sref="networks.search" ng-click="selectSearchedGroups()">Search Results</a>
+                        </li>
+                        <li style="cursor: pointer">
+                            <a ui-sref="networks.all" ng-click="selectAllGroups()">All Groups</a>
+                        </li>
+                    </ul>
+
+                    <div class="buttons floatRight">
+                        <input type="submit" class="btn cGreenBtn-w margin-right-5px creatgroup-popup" value="Create Group">
+                    </div>
+
+                </div>
+                <div class="clearFix"></div>
+                <div class="group-box-container floatLeft">
+                    <div ui-view></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--popup markups-->
+    <div class="popup-main-wrapper floatLeft" id="popup-box">
+        <div class="popup-header floatLeft">
+            <p class="floatLeft">Create a new group</p>
+            <a href="javascript:void(0)" class="floatRight b-close"><img src="assets/icons/cross-icon.png">
+            </a>
+        </div>
+        <div class="popup-inputs floatLeft">
+            <label class="popup-inputs-lable floatLeft">Group Name</label>
+            <input type="text" name="group_name[]" value="" class="popup-inputs-formInputs floatLeft" data-placeholder="e.g: Cricket Team" ng-model="newGroup.name">
+            <label class="popup-inputs-lable floatLeft">Description</label>
+            <input type="text" name="group_name[]" value="" class="popup-inputs-formInputs floatLeft" data-placeholder="Who do you want to add to the group" ng-model="newGroup.desc">
+        </div>
+        <div class="popup-privacy floatLeft">
+            <label class="popup-privacy-lable floatLeft">Select Privacy</label>
+            <div class="privacy-box floatLeft privacy-box-olive">
+                <img class="check-icon-wht floatRight display-none" src="assets/icons/check-icon-whit.png">
+                <span class="box-heading floatLeft">Public</span>
+                <p class="box-desc floatLeft box-desc-ot">Anyone on campus can see the group, it’s members, and join the group at will.</p>
+            </div>
+            <div class="privacy-box floatLeft privacy-box-blue">
+                <img class="check-icon-wht floatRight " src="assets/icons/check-icon-whit.png">
+                <span class="box-heading floatLeft box-heading-wh">Private</span>
+                <p class="box-desc floatLeft box-desc-bt">Anyone on campus can see the group, but have to request membersip.</p>
+            </div>
+            <div class="privacy-box floatLeft privacy-box-grn">
+                <img class="check-icon-wht floatRight display-none" src="assets/icons/check-icon-whit.png">
+                <span class="box-heading floatLeft">Secret</span>
+                <p class="box-desc floatLeft box-desc-gt">Group is excluded from search results. Membership by invite only.</p>
+            </div>
+            <div class="buttons floatRight">
+                <input type="submit" class="btn cGreenBtn-w margin-right-bottom" value="Create Group" ng-click="addNewGroup(newGroup)">
+            </div>
+        </div>
+    </div>
+</div>
+<!--popup markups Ends-->
+<!--popup script-->
+<script>
+    $('body').delegate('.creatgroup-popup', 'click', function() {
+        $('#popup-box').bPopup({
+            modalClose: false,
+            opacity: 0.6,
+            speed: 450,
+            transition: 'slideDown'
+        });
+    });
+</script>
+<!--popup script ends-->

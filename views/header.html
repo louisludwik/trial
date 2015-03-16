@@ -1,0 +1,210 @@
+<div class="nav-wrapper" ng-controller="HeaderCtrl">
+    <a ui-sref='wall' class="floatLeft logo"><img src="assets/images/bearfeed-logo.png"> </a>
+    <ul class="nav-menu floatRight">
+        <li>
+            <a ui-sref='wall' class="link active wall"><img src="assets/icons/home-icon@2x.png" style="height: 28px !important; width:30px !important;"> </a>
+        </li>
+        <li>
+            <a ng-click="updateMessages()" class="link messages msg-dd-show"><img src="assets/icons/message-icon@2x.png" style="height: 27px !important; width:29px !important;cursor:pointer">
+                <div class="clearFix"></div>
+                <span ng-if="newMessage.length!=0" class="status">{{newMessage.length}}</span> </a>
+            <div class="clearFix"></div>
+            <div class="msg-dd">
+                <!--<div class="menu-topborder"></div>-->
+                <div class="msg-DD-userinfo-container">
+                    <div ng-show="loading" class="msg-DD-userinfo">Loading</div>
+                    <div class="msg-DD-userinfo" ng-repeat="coversation in liveMessages">
+                        <a ui-sref='messages({ Id:coversation.id })' class="msg-DD-userifno-bar"> <img src="{{coversation.otherManPic}}" class="floatLeft">
+                            <p class="msg-DD-username">{{coversation.title}}
+                                <!--<label class="counter">4</label>-->
+                            </p>
+                            <p class="msg-DD-msg" ng-if="coversation.lastMessageText.length>0" ng-bind-html="coversation.lastMessageText | twemoji | to_trusted"></p>
+                            <div class="clearFix"></div>
+                            <!--<span class=" msg-DD-time">1 hour ago</span>-->
+                        </a>
+                    </div>
+                    <div class="show-more"> <a ui-sref='messages' href="javascript:void(0)" class="show-more-text">see all</a> </div>
+                </div>
+            </div>
+        </li>
+        <li>
+            <!-- <a ui-sref='messages' class="link"><img src="assets/icons/friends-icon.png"
+                                                    style="height: 26px !important; width:32px !important;"> -->
+            <a ui-sref='networks.all' class="link"><img src="assets/icons/friends-icon@2x.png" style="height: 26px !important; width:32px !important;">
+                <div class="clearFix"></div>
+            </a>
+        </li>
+        <li>
+            <a ng-click="updateNotifications()" class="link notifications noti-dd-show"><img src="assets/icons/notification-icon@2x.png" style="height: 26px !important; width:23px !important;">
+                <div class="clearFix"></div>
+                <span ng-if="notification.length!=0" class="status">{{notification.length}}</span> <span ng-if="notifications.length!=0" class="status">{{notifications.length}}</span>
+                <div class="clearFix"></div>
+            </a>
+            <div class="clearFix"></div>
+            <div class="noti-dd">
+                <!--<div class="menu-topborder"></div>-->
+                <div class="notification-DD-userinfo-container">
+                    <div ng-show="loading" class="notification-DD-userinfo">Loading</div>
+                    <div class="notification-DD-userinfo" ng-repeat="notification in liveNotifications">
+                        <a ui-sref='notifications' class="noti-DD-userifno-bar">
+                            <div ng-switch on="notification.type">
+                                <div ng-switch-when="liked"> <img src="{{notification.user.profile_image}}" class="floatLeft">
+                                    <p ui-sref="profile.posts({ Id:notification.user.id })" class="noti-DD-username centered-content"> <span>{{notification.user.name}}</span> liked your <span>Post</span> </p>
+                                    <!--<p class="noti-DD-comment">"How do you know that all the people"...</p>-->
+                                    <div class="clearFix"></div>
+                                    <!--<span class=" noti-DD-time">1 hour ago</span>-->
+                                </div>
+                                <div ng-switch-when="added_group"> <img src="{{notification.user.profile_image}}" class="floatLeft">
+                                    <p ui-sref="profile.posts({ Id:notification.user.id })" class="noti-DD-username centered-content"> <span>{{notification.user.name}}</span> added you in <span>Group</span> </p>
+                                    <!--<p class="noti-DD-comment">"How do you know that all the people"...</p>-->
+                                    <div class="clearFix"></div>
+                                    <!--<span class=" noti-DD-time">1 hour ago</span>-->
+                                </div>
+                                <div ng-switch-when="commented"> <img src="{{notification.user.profile_image}}" class="floatLeft">
+                                    <p ui-sref="profile.posts({ Id:notification.user.id })" class="noti-DD-username centered-content"> <span>{{notification.user.name}}</span> commented on your<span>Post</span> </p>
+                                    <!--<p class="noti-DD-comment">"How do you know that all the people"...</p>-->
+                                    <div class="clearFix"></div>
+                                    <!--<span class=" noti-DD-time">1 hour ago</span>-->
+                                </div>
+                                <div ng-switch-when="accepted_you"> <img src="{{notification.user.profile_image}}" class="floatLeft">
+                                    <p ui-sref="profile.posts({ Id:notification.user.id })" class="noti-DD-username centered-content"> <span>{{notification.user.name}}</span> accepted your friend request </p>
+                                    <!--<p class="noti-DD-comment">"How do you know that all the people"...</p>-->
+                                    <div class="clearFix"></div>
+                                    <!--<span class=" noti-DD-time">1 hour ago</span>-->
+                                </div>
+                                <div ng-switch-when="added_you"> <img src="{{notification.user.profile_image}}" class="floatLeft">
+                                    <p ui-sref="profile.posts({ Id:notification.user.id })" class="noti-DD-username centered-content"> <span>{{notification.user.name}}</span> added you </p>
+                                    <!--<p class="noti-DD-comment">"How do you know that all the people"...</p>-->
+                                    <div class="clearFix"></div>
+                                    <!--<span class=" noti-DD-time">1 hour ago</span>-->
+                                </div>
+                                <div ng-switch-when="group_post"> <img src="{{notification.user.profile_image}}" class="floatLeft">
+                                    <p ui-sref="profile.posts({ Id:notification.user.id })" class="noti-DD-username centered-content"> <span>{{notification.user.name}}</span> posted in <span>Group</span> </p>
+                                    <!--<p class="noti-DD-comment">"How do you know that all the people"...</p>-->
+                                    <div class="clearFix"></div>
+                                    <!--<span class=" noti-DD-time">1 hour ago</span>-->
+                                </div>
+                                <div ng-switch-when="approved_post"> <img src="{{notification.user.profile_image}}" class="floatLeft">
+                                    <p ui-sref="profile.posts({ Id:notification.user.id })" class="noti-DD-username centered-content"> <span>{{notification.user.name}}</span> approved your <span>Post</span> </p>
+                                    <!--<p class="noti-DD-comment">"How do you know that all the people"...</p>-->
+                                    <div class="clearFix"></div>
+                                    <!--<span class=" noti-DD-time">1 hour ago</span>-->
+                                </div>
+                                <div ng-switch-when="rejected_post"> <img src="{{notification.user.profile_image}}" class="floatLeft">
+                                    <p ui-sref="profile.posts({ Id:notification.user.id })" class="noti-DD-username centered-content"> <span>{{notification.user.name}}</span> rejected your <span>Post</span> </p>
+                                    <!--<p class="noti-DD-comment">"How do you know that all the people"...</p>-->
+                                    <div class="clearFix"></div>
+                                    <!--<span class=" noti-DD-time">1 hour ago</span>-->
+                                </div>
+                                <div ng-switch-default>Not categorized</div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="show-more"> <a ui-sref='notifications' class="show-more-text">see all</a> </div>
+                </div>
+            </div>
+        </li>
+        <div class="nav-vertical-divider floatLeft"></div>
+        <li>
+            <a id="flip"><img id="userImage" class="floatLeft" src="{{window.UserImage}}"> <span style="cursor: pointer;" class="floatLeft">{{window.UserName}}</span> <img class="floatLeft" id="dropdownIcon" src="assets/icons/dropdown-icon.png">
+                <div class="clearFix"></div>
+            </a>
+            <div class="clearFix"></div>
+            <div id="menu">
+                <!--<div id="arrow"></div>-->
+                <div id="borderLeft"></div>
+                <a ui-sref="profile.posts({ Id:window.userId })"><img id="user-icon" src="assets/icons/nav-user-icon.png">Profile</a>
+                <a ui-sref="settings({ Id:window.userId })"><img id="user-settings" src="assets/icons/profile-setting-icon.png">Settings </a>
+                <a ui-sref='auth.logout'><img id="user-logout" src="assets/icons/shear-icon.png">Logout</a>
+                <!--  <a href="#">Edit Slider <i id="fourthIcon" class="fa fa-pencil"></i></a> -->
+            </div>
+            <!--<div class="panel">
+                <div class="proView">
+                    <ul>
+                        <li class="viewpro"><a ui-sref="profile.posts({ Id:window.userId })">View Profile</a>
+                        </li>
+                        <li class="setigs"><a href="#">Settings</a>
+                        </li>
+                        <li class="setigsA"><a ui-sref='auth.logout'>LogOut</a>
+                        </li>
+                    </ul>
+                </div>-->
+        </li>
+    </ul>
+</div>
+<script type="text/javascript">
+    $(document).ready(function() {
+        // var url= window.location.href;
+        //     var lastSegment = url.split('/').pop();
+        //     console.log(lastSegment);
+        //     $('.nav-menu').find(lastSegment);
+        //     $('.link').removeClass('active');
+        //     $('.'+lastSegment).addClass('active');
+
+        $("body").delegate('.link', 'click', function() {
+            $('.link').removeClass('active');
+            $(this).addClass('active');
+        });
+        var donot_closePopup;
+        $("body").delegate('#flip', 'click', function() {
+            donot_closePopup = true;
+            $(".msg-dd").hide();
+            $(".noti-dd").hide();
+            $("#menu").show();
+            setTimeout(function() {
+                donot_closePopup = false;
+            }, 400);
+        });
+        $("body").delegate('.noti-dd-show', 'click', function() {
+            donot_closePopup = true;
+            $(".msg-dd").hide();
+            $("#menu").hide();
+            $(".noti-dd").show();
+            setTimeout(function() {
+                donot_closePopup = false;
+            }, 400);
+        });
+        $("body").delegate('.msg-dd-show', 'click', function() {
+            donot_closePopup = true;
+            $("#menu").hide();
+            $(".noti-dd").hide();
+            $(".msg-dd").show();
+            setTimeout(function() {
+                donot_closePopup = false;
+            }, 400);
+        });
+        $(document).delegate('*', 'click', function() {
+            if (donot_closePopup == true) {
+                return false;
+            }
+            $("#menu").hide();
+            $(".noti-dd").hide();
+            $(".msg-dd").hide();
+        });
+
+        /*Setting the Navbar Active Links*/
+        var currActive = $(".nav").find(".actve");
+        currActive.removeClass("actve");
+
+        var url = document.URL;
+        url = url.split('/');
+        url = url[url.length - 1];
+        if (url === "wall") {
+            $(".nav li a:contains('Campus')").addClass("actve");
+        } else if (url === "messages") {
+            $(".nav li a:contains('Messages')").addClass("actve");
+        } else if (url === "notifications") {
+            $(".nav li a:contains('Notifications')").addClass("actve");
+        } else {
+
+        }
+
+        $(".nav li a").click(function() {
+            var currActive = $(".nav").find(".actve");
+            currActive.removeClass("actve");
+
+            $(this).addClass("actve")
+        });
+
+    });
+</script>

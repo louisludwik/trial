@@ -1,0 +1,179 @@
+<style>
+.trimMe {
+	width: 100px;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+}
+.trimMe1 {
+	width: 60px;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+}
+.cude-loader {
+	left: 60%;
+	zoom: 0.25;
+}
+.cube .ani1 .front i:nth-child(2) {
+	background: #f2f2f2;
+}
+.cube .ani2 .bottom i:nth-child(1) {
+	background: #f2f2f2;
+}
+@-webkit-keyframes cube-ani6 {
+ 0% {
+ box-shadow: 30px 0px 0 #4cdbbe,  60px 0px 0 #f2f2f2,  0px 30px 0 #48a4e1,  30px 30px 0 #4cdbbe,  60px 30px 0 #48a4e1;
+}
+ 25% {
+ background: #fccc25;
+ box-shadow: 60px 0px 0 #f2f2f2,  0px 30px 0 #48a4e1,  60px 30px 0 #48a4e1,  0px 60px 0 #48a4e1,  60px 60px 0 #e85965;
+}
+ 50% {
+ background: #fccc25;
+ box-shadow: 30px 0 0 #4cdbbe,  60px 0 0 #f2f2f2,  0px 60px 0 #48a4e1,  30px 60px 0 #f2f2f2,  60px 60px 0 #e85965;
+}
+ 75% {
+ background: transparent;
+ box-shadow: 30px 0 0 #4cdbbe,  60px 0 0 #f2f2f2,  30px 30px 0 #4cdbbe,  60px 30px 0 #48a4e1,  30px 60px 0 #f2f2f2,  60px 60px 0 #e85965;
+}
+}
+</style>
+<div class="clearFix"></div>
+<div class="massenger-wrapper " data-ng-controller="conversationsCtrl" ng-init="waitForNewMessage()" style="padding-top:76px">
+  <div class="messenger-container" style="position:relative;border-radius:3px 3px 0 0;padding:0;border-top:#e6e6e6 1px solid">
+    <div class="Conversations-container floatLeft Conversations-container-new"><a href="javascript:void(0)" class="floatLeft" style="width:155px">
+      <p>Conversations ({{listOfConversation.length}})</p>
+      </a>
+      <div class="buttons  floatLeft">
+        <input ng-click="createNewMessage()" type="submit" class="btn-medium cGreenBtn-w creatmsg-popup" value="New">
+      </div>
+      <div class="vertical-divider floatLeft"></div>
+      <a ng-show="!isNewMessage" href="javascript:void(0)" class="floatLeft">
+      <p class="conversations-username">{{selectedConversation.participantsNames}}</p>
+      </a> <a ng-show="isNewMessage" href="javascript:void(0)" class="floatLeft">
+      <p class="conversations-username">New Message</p>
+      </a> <a href="javascript:void(0)" class="floatRight margin-right-22px"><img src="assets/icons/setting-icon.png"> </a> </div>
+    <div class="clear"></div>
+    <div class="left-box left">
+      <div class="conversations-info">
+        <div class="conversations-search">
+          <form>
+            <input type="text" class="conversations-formInputs" placeholder="Search"  ng-model="query"/>
+          </form>
+        </div>
+      </div>
+      <div id="conversations" class="conversations-info-wrapper floatLeft">
+        <div>
+          <div class="user-short-messages floatLeft"
+                     ng-repeat="conversation in listOfConversation | orderBy:'data.lastActivity':true | filter:query"
+                     ng-click="selectConversation(conversation)" id="{{conversation.id}}"
+                     ng-class="{'selected-message': conversation.isSelected==true}" style="cursor:pointer">
+            <div class="data-time">
+              <p class="data-time-text" style="font-size: xx-small;">{{conversation.lastActivity|fromNow}}</p>
+            </div>
+            <span ng-if="conversation.unread!=0" class="floatLeft status-group">{{conversation.unread}}</span> <a href="javascript:void(0)"><img height="35px" width="35px" src="{{conversation.otherManPic}}"> </a>
+            <div class="user-short-messages-name floatLeft">
+              <p class="text-username">{{conversation.title}}</p>
+              <div class="clearFix"></div>
+              <p class="user-message trimMe" ng-if="conversation.lastMessageText.length>0"
+                           ng-bind-html="conversation.lastMessageText | twemoji | to_trusted"></p>
+            </div>
+          </div>
+        </div>
+        <div class="clearFix"></div>
+      </div>
+    </div>
+    <!-- end left part -->
+    <div ng-show="isNewMessage" class="newmsg-wrapper floatRight">
+      <form>
+        <div class="adduser-list"> <em>To:</em> <span class="added-user" ng-repeat="user in addedUsers"> {{user.name}} <a ng-click="removeUser($index)" style="cursor: pointer;"> <img src="assets/icons/cancel.png" style="width:9px;"> </a> </span> 
+          <!--<span class="added-user">Patrick Bruzeks <a href="javascript:void(0)"><img
+                            src="assets/icons/remove-icon.png"></a></span>-->
+          <input type="text" class="newmsg-input" id="userlist-input" autofocus="autofocus" data-ng-model="newUserSearch"
+                           placeholder="Name" ng-model-options="{debounce: 250}">
+          <div class="autocomplete-list" style="overflow:auto;z-index:10000;max-height:300px">
+            <ul>
+              <li style="cursor: pointer;" ng-repeat="user in resultUsers" ng-click="userSelected($index)"><a><img src="{{user.profile_image}}"> {{user.name}}</a>
+                <hr>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </form>
+      <div class="clear"></div>
+    </div>
+    <div  class="conversations-messages-wrapper floatRight" id="messages" style="overflow-y:scroll" keep-scroll>
+      <div class="data-time-mesngr" ng-if="isPreviousLoading" style="background:#fff;width:100%;height:100%;">
+        <div class="cude-loader">
+          <div class="cube">
+            <div class="ani1">
+              <div class="front"><i></i><i></i><i></i></div>
+              <div class="left"><i></i><i></i><i></i></div>
+            </div>
+            <div class="ani2">
+              <div class="front"><i></i><i></i><i></i></div>
+              <div class="bottom"><i></i><i></i><i></i></div>
+            </div>
+            <div class="ani3">
+              <div class="front"><i></i><i></i><i></i></div>
+              <div class="right"><i></i><i></i><i></i></div>
+            </div>
+            <div class="ani4">
+              <div class="front"><i></i><i></i><i></i></div>
+              <div class="top"><i></i><i></i><i></i></div>
+            </div>
+            <div class="shadow"></div>
+          </div>
+        </div>
+      </div>
+      <div ng-repeat="(group, messages) in selectedConversation.groupMessages">
+        <div class="horizontal-devider">
+          <hr class="floatRight">
+          <p class="floatRight devider-text">{{messages[messages.length-1].time|calendar}}</p>
+          <hr class="floatRight">
+          <div class="clear"></div>
+        </div>
+        <div class="conversations-messages floatRight" ng-repeat="message in messages| orderBy:'time':false" scroll-item>
+          <div class="data-time">
+            <p class="data-time-text">{{message.time|short}}</p>
+            <img ng-if="message.isMine" class="floatRight margin-top-5px" src="assets/icons/check-icon.png"> <img ng-if="message.isSeen" class="floatRight margin-top-5px" src="assets/icons/check-icon.png"> </div>
+          <a ui-sref="profile.posts({ Id:message.by.id })"><img src="{{message.by.profile_image}}" class=""> <!-- no-img class will be used here when we have multiple conversion for the same user in a specific time in order not to repeat his img everytime when he send msg -->
+          <div class="floatLeft conversations-name" id="{{message.id}}">
+            <p class="text-username">{{message.by.name}}</p>
+            <div class="clearFix"></div>
+            <p class="user-message" ng-if="message.text.length>0" ng-bind-html="message.text | twemoji | to_trusted"></p>
+          </div>
+          <div class="clearFix"></div>
+          </a> </div>
+      </div>
+    </div>
+    <div class="conversations-messages-box-wrapper floatRight">
+      <div class="conversations-messages-box floatLeft">
+        <form>
+          <!--<input type="text" class="conversations-sendingbox-formInputs floatLeft" placeholder="">-->
+          <textarea ng-enter="sendNewMessage()" class="conversations-sendingbox-textarea floatLeft" placeholder="Write New Message" ng-model="newMessage"></textarea>
+          <!--<input type="submit" ng-click="sendNewMessage()" class="msg-btn cGreenBtn floatRight" value="Send" id="newMessageBtn">--> 
+          <!--<div class="conversations-messages-box-btn floatRight">
+                            <input type="submit" ng-click="sendNewMessage()" class="msg-btn cGreenBtn" value="Send" id="newMessageBtn">
+                        </div>-->
+        </form>
+      </div>
+    </div>
+    <div class="clear"></div>
+  </div>
+</div>
+
+<!----For messenger auto height----> 
+<script type="text/javascript">
+    $(document).ready(function () {
+        var height = $(window).height();
+        $(window).resize(function () {
+            var height = $(window).height();
+            $('.conversations-info-wrapper').css('height', (height - 213));
+            $('.conversations-messages-wrapper').css('height', ((height - 74) - 177));
+        });
+        $('.conversations-info-wrapper').css('height', (height - 213));
+        $('.conversations-messages-wrapper').css('height', ((height - 74) - 177));
+    });
+</script> 
