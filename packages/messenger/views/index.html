@@ -134,7 +134,7 @@
           <hr class="floatRight">
           <div class="clear"></div>
         </div>
-        <div class="conversations-messages floatRight" ng-repeat="message in messages| orderBy:'time':false" scroll-item>
+          <div class="conversations-messages floatRight fx-zoom-up fx-speed-500" ng-repeat="message in messages| orderBy:'time':false" scroll-item>
           <div class="data-time">
             <p class="data-time-text">{{message.time|short}}</p>
             <img ng-if="message.isMine" class="floatRight margin-top-5px" src="assets/icons/check-icon.png"> <img ng-if="message.isSeen" class="floatRight margin-top-5px" src="assets/icons/check-icon.png"> </div>
